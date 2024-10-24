@@ -9,10 +9,11 @@
 #include "utils.h"
 #include "api.h"
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[])
+{
     POW_setCPUSpeed(CPU_SPEED_MENU);
 
-    SDL_Surface* screen = GFX_init(MODE_MAIN);
+    SDL_Surface *screen = GFX_init(MODE_MAIN);
     POW_init();
     InitSettings();
 
@@ -22,27 +23,34 @@ int main(int argc, char* argv[]) {
 
     // Show confirmation message
     // GFX_blitHardwareGroup(screen, show_setting);
-    GFX_blitMessage(font.large, "Are you sure you want to clear\nRecently Played?", screen, NULL);
-    GFX_blitButtonGroup((char*[]){ "B","CANCEL", "A","CLEAR", NULL }, screen, 1);
+    GFX_blitMessage(font.large, "Sicher, dass die 'Weiter Spielen' Liste\ngelöscht werden soll?", screen, NULL);
+    GFX_blitButtonGroup((char *[]){"B", "ABBRECHEN", "A", "LÖSCHEN", NULL}, screen, 1);
 
     GFX_flip(screen);
 
     // Wait for user's input
-    while (!quit) {
+    while (!quit)
+    {
         PAD_poll();
-        if (PAD_justPressed(BTN_A)) {
+        if (PAD_justPressed(BTN_A))
+        {
             save_changes = 1;
             quit = 1;
-        } else if (PAD_justPressed(BTN_B)) {
+        }
+        else if (PAD_justPressed(BTN_B))
+        {
             quit = 1;
-        } else {
+        }
+        else
+        {
             GFX_sync();
         }
     }
 
     // Execute main program based on user's input
-    if (save_changes) {
-         fclose(fopen(RECENT_PATH, "w"));
+    if (save_changes)
+    {
+        fclose(fopen(RECENT_PATH, "w"));
     }
 
     QuitSettings();

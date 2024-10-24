@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-DISK_PATH="/dev/disk2"
+DISK_PATH="/dev/disk6"
 FIRMWARE_NAME="35XX-64GB230309EN.IMG"
 RELEASE_NAME="FinUI-*-0-full.zip"
 WORKING_DIRECTORY="./releases/"
@@ -14,6 +14,7 @@ echo "[*] INSTALLING FIRMWARE"
 diskutil unmountDisk $DISK_PATH
 sleep 3
 
+pwd
 sudo dd bs=1m if=$FIRMWARE_NAME of=$DISK_PATH
 sleep 3
 
